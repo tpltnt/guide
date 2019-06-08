@@ -13,6 +13,7 @@
 - [Tutorials](./tutorials.md)
     - [Basics - Anatomy of a Nannou App](./tutorials/basics/anatomy-of-a-nannou-app.md)
     - [Basics - Drawing 2D Shapes](./tutorials/basics/drawing-2d-shapes.md)
+    - [Basics - Writing on the Screen](./tutorials/basics/writing-on-the-screen.md)
 - [Developer Reference](./developer_reference.md)
 - [API Reference](./api_reference.md)
 - [Showcases](./showcases.md)
