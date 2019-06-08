@@ -32,6 +32,7 @@ Nannou app.
 Here is the minimal skeleton of our app.
 ```rust,no_run
 #![allow(unused_imports)]
+#![allow(dead_code)]
 extern crate nannou;  // tell rust that we want to use nannou
 
 use nannou::prelude::*;  // get a lot of convenience functions
@@ -55,16 +56,31 @@ struct Ids {
     text: widget::Id,  // only one text widget to be used
 }
 
-// Generate a model of the world (to work with)
 fn model(app: &App) -> Model {
     app.new_window().event(event).view(view).build().unwrap();  // build a window for the app, handle keystrokes, draw things on it
     let mut ui = app.new_ui().build().unwrap(); // create a mutable UI
-    let message = String::from("TEST"); // text to display
+    let message = String::from(
+        "PRESS 'L' TO LIST ALL FONT IDS\nON THE TERMINAL\n\nPRESS 'C' TO CHANGE FONT\nON SCREEN\n\nPRESS 'ESC' TO QUIT",
+    ); // text to display
 
     // generate IDs for each widget
     let widget_ids = Ids {
         text: ui.generate_widget_id(),
     };
+
+    // load other fonts
+    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
+    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
+    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
+    if let Err(e) = res {
+        println!("{}", e);
+        panic!("loading font failed");
+    }
+    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+    if let Err(e) = res {
+        println!("{}", e);
+        panic!("loading font failed");
+    }
 
     // generate the actual model (of the UI)
     Model {
@@ -86,41 +102,79 @@ fn view(app: &App, model: &Model, frame: Frame) -> Frame {
     frame
 }
 ```
+
 This has a lot going on here. The main function
 ```rust,no_run
-##![allow(unused_imports)]
-#extern crate nannou;  // tell rust that we want to use nannou
+# #![allow(unused_imports)]
+# #![allow(dead_code)]
+# extern crate nannou;  // tell rust that we want to use nannou
 #
-#use nannou::prelude::*;  // get a lot of convenience functions
-#use nannou::ui::prelude::*;  // get a lot of functions for UI
-#use nannou::ui::Color::Rgba;  // we want to use color later
+# use nannou::prelude::*;  // get a lot of convenience functions
+# use nannou::ui::prelude::*;  // get a lot of functions for UI
+# use nannou::ui::Color::Rgba;  // we want to use color later
 #
-#// model of the world (on screen)
-#struct Model {
+# // model of the world (on screen)
+# struct Model {
 #    ui: Ui,  // data structure to handle (bare) UI
 #    widget_ids: Ids,  // IDs of UI widgets
 #    message: String,  // message to be displayed
 #    font_id: nannou::ui::text::font::Id,  // ID of font used to display text
-#}
+# }
 #
-#// IDs of the widgets in use
-#struct Ids {
+# // IDs of the widgets in use
+# struct Ids {
 #    text: widget::Id,  // only one text widget to be used
-#}
+# }
 #
 fn main() {
     nannou::app(model).update(update).run();  // run an app which can handle (time) updates
 }
-#// handle events and update the (world) model accordingly
-#fn event(_app: &App, model: &mut Model, event: WindowEvent) {}
+
+# fn model(app: &App) -> Model {
+#    app.new_window().event(event).view(view).build().unwrap();  // build a window for the app, handle keystrokes, draw things on it
+#    let mut ui = app.new_ui().build().unwrap(); // create a mutable UI
+#    let message = String::from(
+#        "PRESS 'L' TO LIST ALL FONT IDS\nON THE TERMINAL\n\nPRESS 'C' TO CHANGE FONT\nON SCREEN\n\nPRESS 'ESC' TO QUIT",
+#    ); // text to display
 #
-#// handle update event to update the (world) model accordingly
-#fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
+#    // generate IDs for each widget
+#    let widget_ids = Ids {
+#        text: ui.generate_widget_id(),
+#    };
 #
-#// display the state of the world
-#fn view(app: &App, model: &Model, frame: Frame) -> Frame {
+#    // load other fonts
+#    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
+#    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
+#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#
+#    // generate the actual model (of the UI)
+#    Model {
+#        ui,
+#        message,
+#        font_id,
+#        widget_ids,
+#    }
+# }
+#
+# // handle events and update the (world) model accordingly
+# fn event(_app: &App, model: &mut Model, event: WindowEvent) {}
+#
+# // handle update event to update the (world) model accordingly
+# fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
+#
+# // display the state of the world
+# fn view(app: &App, model: &Model, frame: Frame) -> Frame {
 #    frame
-#}
+# }
 ```
 builds an app based on the model (state description) emitted by the `model()` function.
 This model will be updated (by timing events) with the `update()` function. The
@@ -130,16 +184,17 @@ want to, but we keep it for now.)
 
 The model for this app looks like this:
 ```rust,no_run
-##![allow(unused_imports)]
-#extern crate nannou;  // tell rust that we want to use nannou
+# #![allow(unused_imports)]
+# #![allow(dead_code)]
+# extern crate nannou;  // tell rust that we want to use nannou
 #
-#use nannou::prelude::*;  // get a lot of convenience functions
-#use nannou::ui::prelude::*;  // get a lot of functions for UI
-#use nannou::ui::Color::Rgba;  // we want to use color later
+# use nannou::prelude::*;  // get a lot of convenience functions
+# use nannou::ui::prelude::*;  // get a lot of functions for UI
+# use nannou::ui::Color::Rgba;  // we want to use color later
 #
-#fn main() {
+# fn main() {
 #    nannou::app(model).update(update).run();  // run an app which can handle (time) updates
-#}
+# }
 #
 struct Model {
     ui: Ui,  // data structure to handle (bare) UI
@@ -152,16 +207,52 @@ struct Model {
 struct Ids {
     text: widget::Id,  // only one text widget to be used
 }
-#// handle events and update the (world) model accordingly
-#fn event(_app: &App, model: &mut Model, event: WindowEvent) {}
 #
-#// handle update event to update the (world) model accordingly
-#fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
+# fn model(app: &App) -> Model {
+#    app.new_window().event(event).view(view).build().unwrap();  // build a window for the app, handle keystrokes, draw things on it
+#    let mut ui = app.new_ui().build().unwrap(); // create a mutable UI
+#    let message = String::from(
+#        "PRESS 'L' TO LIST ALL FONT IDS\nON THE TERMINAL\n\nPRESS 'C' TO CHANGE FONT\nON SCREEN\n\nPRESS 'ESC' TO QUIT",
+#    ); // text to display
 #
-#// display the state of the world
-#fn view(app: &App, model: &Model, frame: Frame) -> Frame {
+#    // generate IDs for each widget
+#    let widget_ids = Ids {
+#        text: ui.generate_widget_id(),
+#    };
+#
+#    // load other fonts
+#    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
+#    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
+#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#
+#    // generate the actual model (of the UI)
+#    Model {
+#        ui,
+#        message,
+#        font_id,
+#        widget_ids,
+#    }
+# }
+#
+# // handle events and update the (world) model accordingly
+# fn event(_app: &App, _model: &mut Model, event: WindowEvent) {}
+#
+# // handle update event to update the (world) model accordingly
+# fn update(_app: &App, _model: &mut Model, _update: nannou::event::Update) {}
+#
+# // display the state of the world
+# fn view(app: &App, _model: &Model, frame: Frame) -> Frame {
 #    frame
-#}
+# }
 ```
 It contains the field `ui` to hold the [user interface](https://en.wikipedia.org/wiki/User_interface)
 (actually the [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface)). The UI contains
@@ -180,29 +271,30 @@ This font ID is stored in the field `font_id`. Note that different versions of a
 the `model()` function.
 
 ```rust,no_run
-##![allow(unused_imports)]
-#extern crate nannou;  // tell rust that we want to use nannou
+# #![allow(unused_imports)]
+# #![allow(dead_code)]
+# extern crate nannou;  // tell rust that we want to use nannou
 #
-#use nannou::prelude::*;  // get a lot of convenience functions
-#use nannou::ui::prelude::*;  // get a lot of functions for UI
-#use nannou::ui::Color::Rgba;  // we want to use color later
+# use nannou::prelude::*;  // get a lot of convenience functions
+# use nannou::ui::prelude::*;  // get a lot of functions for UI
+# use nannou::ui::Color::Rgba;  // we want to use color later
 #
-#fn main() {
+# fn main() {
 #    nannou::app(model).update(update).run();  // run an app which can handle (time) updates
-#}
+# }
 #
-#// model of the world (on screen)
-#struct Model {
+# // model of the world (on screen)
+# struct Model {
 #    ui: Ui,  // data structure to handle (bare) UI
 #    widget_ids: Ids,  // IDs of UI widgets
 #    message: String,  // message to be displayed
 #    font_id: nannou::ui::text::font::Id,  // ID of font used to display text
-#}
+# }
 #
-#// IDs of the widgets in use
-#struct Ids {
+# // IDs of the widgets in use
+# struct Ids {
 #    text: widget::Id,  // only one text widget to be used
-#}
+# }
 #
 fn model(app: &App) -> Model {
     app.new_window().event(event).view(view).build().unwrap();  // build a window for the app, handle keystrokes, draw things on it
@@ -238,24 +330,90 @@ fn model(app: &App) -> Model {
         widget_ids,
     }
 }
-#// handle events and update the (world) model accordingly
-#fn event(_app: &App, model: &mut Model, event: WindowEvent) {}
+# // handle events and update the (world) model accordingly
+# fn event(_app: &App, model: &mut Model, event: WindowEvent) {}
 #
-#// handle update event to update the (world) model accordingly
-#fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
+# // handle update event to update the (world) model accordingly
+# fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
 #
-#// display the state of the world
-#fn view(app: &App, model: &Model, frame: Frame) -> Frame {
+# // display the state of the world
+# fn view(app: &App, model: &Model, frame: Frame) -> Frame {
 #    frame
-#}
+# }
 ```
 Using `app.new_window().event(event).view(view).build().unwrap();` we build a window for the app,
 assign it a function (`event`) handle window events (like keystrokes), and point to `view()` to
 draw things on it. The UI is build using `app.new_ui().build().unwrap();`. In
 ```rust,no_run
+# #![allow(unused_imports)]
+# #![allow(dead_code)]
+# extern crate nannou;  // tell rust that we want to use nannou
+#
+# use nannou::prelude::*;  // get a lot of convenience functions
+# use nannou::ui::prelude::*;  // get a lot of functions for UI
+# use nannou::ui::Color::Rgba;  // we want to use color later
+#
+# fn main() {
+#    nannou::app(model).update(update).run();  // run an app which can handle (time) updates
+# }
+#
+# // model of the world (on screen)
+# struct Model {
+#    ui: Ui,  // data structure to handle (bare) UI
+#    widget_ids: Ids,  // IDs of UI widgets
+#    message: String,  // message to be displayed
+#    font_id: nannou::ui::text::font::Id,  // ID of font used to display text
+# }
+#
+# // IDs of the widgets in use
+# struct Ids {
+#    text: widget::Id,  // only one text widget to be used
+# }
+#
+# fn model(app: &App) -> Model {
+#    app.new_window().event(event).view(view).build().unwrap();  // build a window for the app, handle keystrokes, draw things on it
+#    let mut ui = app.new_ui().build().unwrap(); // create a mutable UI
+#    let message = String::from(
+#        "PRESS 'L' TO LIST ALL FONT IDS\nON THE TERMINAL\n\nPRESS 'C' TO CHANGE FONT\nON SCREEN\n\nPRESS 'ESC' TO QUIT",
+#    ); // text to display
+#
+#    // generate IDs for each widget
     let widget_ids = Ids {
         text: ui.generate_widget_id(),
     };
+#
+#    // load other fonts
+#    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
+#    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
+#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#
+#   // generate the actual model (of the UI)
+#    Model {
+#        ui,
+#        message,
+#        font_id,
+#        widget_ids,
+#    }
+# }
+# // handle events and update the (world) model accordingly
+# fn event(_app: &App, model: &mut Model, event: WindowEvent) {}
+#
+# // handle update event to update the (world) model accordingly
+# fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
+#
+# // display the state of the world
+# fn view(app: &App, model: &Model, frame: Frame) -> Frame {
+#    frame
+# }
 ```
 we make an `Ids` struct and generate a widget ID for the text field. `ui.generate_widget_id()`
 is necessary to gurantee unique IDs per widget so each can interact without internal confusion.
@@ -280,6 +438,67 @@ The model is set up now, let's look at the remaining logic of the app.
 
 First we handle all (window) events.
 ```rust,no_run
+# #![allow(unused_imports)]
+# #![allow(dead_code)]
+# extern crate nannou;  // tell rust that we want to use nannou
+#
+# use nannou::prelude::*;  // get a lot of convenience functions
+# use nannou::ui::prelude::*;  // get a lot of functions for UI
+# use nannou::ui::Color::Rgba;  // we want to use color later
+#
+# fn main() {
+#    nannou::app(model).update(update).run();  // run an app which can handle (time) updates
+# }
+#
+# // model of the world (on screen)
+# struct Model {
+#    ui: Ui,  // data structure to handle (bare) UI
+#    widget_ids: Ids,  // IDs of UI widgets
+#    message: String,  // message to be displayed
+#    font_id: nannou::ui::text::font::Id,  // ID of font used to display text
+# }
+#
+# // IDs of the widgets in use
+# struct Ids {
+#    text: widget::Id,  // only one text widget to be used
+# }
+#
+# fn model(app: &App) -> Model {
+#    app.new_window().event(event).view(view).build().unwrap();  // build a window for the app, handle keystrokes, draw things on it
+#    let mut ui = app.new_ui().build().unwrap(); // create a mutable UI
+#    let message = String::from(
+#        "PRESS 'L' TO LIST ALL FONT IDS\nON THE TERMINAL\n\nPRESS 'C' TO CHANGE FONT\nON SCREEN\n\nPRESS 'ESC' TO QUIT",
+#    ); // text to display
+#
+#    // generate IDs for each widget
+    let widget_ids = Ids {
+        text: ui.generate_widget_id(),
+    };
+#
+#    // load other fonts
+#    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
+#    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
+#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#
+#   // generate the actual model (of the UI)
+#    Model {
+#        ui,
+#        message,
+#        font_id,
+#        widget_ids,
+#    }
+# }
+#
+// handle events and update the (world) model accordingly
 fn event(_app: &App, model: &mut Model, event: WindowEvent) {
     match event {
         // catch and handle key(board) presses
@@ -330,6 +549,14 @@ fn event(_app: &App, model: &mut Model, event: WindowEvent) {
         _ => (),
     }
 }
+#
+# // handle update event to update the (world) model accordingly
+# fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
+#
+# // display the state of the world
+# fn view(app: &App, model: &Model, frame: Frame) -> Frame {
+#    frame
+# }
 ```
 The `event()` function does handle window events. We use [pattern-matching](https://en.wikipedia.org/wiki/Pattern_matching)
 to distinguish between the different events. Here we only care about keys being pressed
@@ -351,6 +578,70 @@ Now that the font ID is chosen we create a new text widget (and thus refresh its
 content) on every update event. By default these update events occur at a rate
 of 60 frames per second.
 ```rust,no_run
+# #![allow(unused_imports)]
+# #![allow(dead_code)]
+# extern crate nannou;  // tell rust that we want to use nannou
+#
+# use nannou::prelude::*;  // get a lot of convenience functions
+# use nannou::ui::prelude::*;  // get a lot of functions for UI
+# use nannou::ui::Color::Rgba;  // we want to use color later
+#
+# fn main() {
+#    nannou::app(model).update(update).run();  // run an app which can handle (time) updates
+# }
+#
+# // model of the world (on screen)
+# struct Model {
+#    ui: Ui,  // data structure to handle (bare) UI
+#    widget_ids: Ids,  // IDs of UI widgets
+#    message: String,  // message to be displayed
+#    font_id: nannou::ui::text::font::Id,  // ID of font used to display text
+# }
+#
+# // IDs of the widgets in use
+# struct Ids {
+#    text: widget::Id,  // only one text widget to be used
+# }
+#
+# fn model(app: &App) -> Model {
+#    app.new_window().event(event).view(view).build().unwrap();  // build a window for the app, handle keystrokes, draw things on it
+#    let mut ui = app.new_ui().build().unwrap(); // create a mutable UI
+#    let message = String::from(
+#        "PRESS 'L' TO LIST ALL FONT IDS\nON THE TERMINAL\n\nPRESS 'C' TO CHANGE FONT\nON SCREEN\n\nPRESS 'ESC' TO QUIT",
+#    ); // text to display
+#
+#    // generate IDs for each widget
+#    let widget_ids = Ids {
+#        text: ui.generate_widget_id(),
+#    };
+#
+#    // load other fonts
+#    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
+#    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
+#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#
+#    // generate the actual model (of the UI)
+#    Model {
+#        ui,
+#        message,
+#        font_id,
+#        widget_ids,
+#    }
+# }
+#
+# // handle events and update the (world) model accordingly
+# fn event(_app: &App, model: &mut Model, event: WindowEvent) {}
+#
+// handle update event to update the (world) model accordingly
 fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {
     // enable instantiation of widgets (to be drawn later)
     let ui = &mut model.ui.set_widgets();
@@ -365,6 +656,15 @@ fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {
         .color(Rgba(1.0, 0.0, 0.0, 1.0)); // pure red font/text color
     textbox.set(model.widget_ids.text, ui); // set (widget) ID for text box
 }
+#
+# fn view(app: &App, model: &Model, frame: Frame) -> Frame {
+#    let draw = app.draw(); // get drawing context /frame
+#    draw.background().rgb(0.0, 0.0, 0.0); // set background to black -> clear screen
+#    draw.to_frame(app, &frame).unwrap(); // write the result of drawing to window's OpenGL frame
+#    model.ui.draw_to_frame(app, &frame).unwrap(); // draw UI on frame
+#    frame // return new frame
+# }
+
 ```
 First we instantiate the UI widgets so they can be drawn later. We create a
 text(box) widget with the message (string) we stored in the (global) app
@@ -376,6 +676,72 @@ the UI is called upon.
 
 Finally state of the model is displayed via
 ```rust,no_run
+# #![allow(unused_imports)]
+# #![allow(dead_code)]
+# extern crate nannou;  // tell rust that we want to use nannou
+#
+# use nannou::prelude::*;  // get a lot of convenience functions
+# use nannou::ui::prelude::*;  // get a lot of functions for UI
+# use nannou::ui::Color::Rgba;  // we want to use color later
+#
+# fn main() {
+#    nannou::app(model).update(update).run();  // run an app which can handle (time) updates
+# }
+#
+# // model of the world (on screen)
+# struct Model {
+#    ui: Ui,  // data structure to handle (bare) UI
+#    widget_ids: Ids,  // IDs of UI widgets
+#    message: String,  // message to be displayed
+#    font_id: nannou::ui::text::font::Id,  // ID of font used to display text
+# }
+#
+# // IDs of the widgets in use
+# struct Ids {
+#    text: widget::Id,  // only one text widget to be used
+# }
+#
+# fn model(app: &App) -> Model {
+#    app.new_window().event(event).view(view).build().unwrap();  // build a window for the app, handle keystrokes, draw things on it
+#    let mut ui = app.new_ui().build().unwrap(); // create a mutable UI
+#    let message = String::from(
+#        "PRESS 'L' TO LIST ALL FONT IDS\nON THE TERMINAL\n\nPRESS 'C' TO CHANGE FONT\nON SCREEN\n\nPRESS 'ESC' TO QUIT",
+#    ); // text to display
+#
+#    // generate IDs for each widget
+#    let widget_ids = Ids {
+#        text: ui.generate_widget_id(),
+#    };
+#
+#    // load other fonts
+#    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
+#    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
+#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    if let Err(e) = res {
+#        println!("{}", e);
+#        panic!("loading font failed");
+#    }
+#
+#    // generate the actual model (of the UI)
+#    Model {
+#        ui,
+#        message,
+#        font_id,
+#        widget_ids,
+#    }
+# }
+#
+# // handle events and update the (world) model accordingly
+# fn event(_app: &App, model: &mut Model, event: WindowEvent) {}
+#
+# // handle update event to update the (world) model accordingly
+# fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
+#
 fn view(app: &App, model: &Model, frame: Frame) -> Frame {
     let draw = app.draw(); // get drawing context /frame
     draw.background().rgb(0.0, 0.0, 0.0); // set background to black -> clear screen
