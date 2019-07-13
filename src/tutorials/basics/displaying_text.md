@@ -1,4 +1,4 @@
-# Writing on the Screen
+# Displaying Text on Screen
 
 **Tutorial Info**
 
