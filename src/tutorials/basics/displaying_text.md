@@ -425,8 +425,8 @@ and get the `next()` ID. Since we are at the beginning this is going to be the I
 font. But wait? We know that the font is a file ... where is that loaded from? You are right
 in that fonts are files. They come in different formats (like [TrueType](https://en.wikipedia.org/wiki/TrueType),
 or [OpenType](https://en.wikipedia.org/wiki/OpenType)). These fonts are assets for the app.
-Assets are stored in the `assets/` directory. The default for is [Noto (sans regular)](https://www.google.com/get/noto/)
-and it needs to be placed in the `DEFAULT_FONT_PATH`, i.e. "fonts/NotoSans/NotoSans-Regular.ttf".
+Assets are stored in the `assets/` directory. The nannou project uses [Noto (sans regular)](https://www.google.com/get/noto/)
+as its default font and it needs to be placed in the `DEFAULT_FONT_PATH`, i.e. "fonts/NotoSans/NotoSans-Regular.ttf".
 We also want different fonts / typefaces. For this tutorial the fonts [retroscape](https://fontstruct.com/fontstructions/show/1233174/retroscape\
  -1)
 and [qwigley](https://www.fontsquirrel.com/fonts/qwigley) are also used. They need to be
