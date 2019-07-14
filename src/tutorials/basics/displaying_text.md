@@ -575,6 +575,12 @@ means the current font ID is last in the list and thus we choose the first ID
 from that list as the next one. This results in a continous cycling through the
 font IDs whenever `C` is pressed.
 
+As a sidenote: The function `event()` only processes pressed keys in this example.
+If you only want to do that, then looking at `key_pressed()` instead of `event()`
+will be worth it. This example uses the more complicated approach to provide a
+skeleton if you want to change fonts when the mouse is clicked or other events
+occur. To do that is left as an excercise to the reader.
+
 Now that the font ID is chosen we create a new text widget (and thus refresh its
 content) on every update event. By default these update events occur at a rate
 of 60 frames per second.
