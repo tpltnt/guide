@@ -250,10 +250,10 @@ That field contains the widget ID for a text field (to display on screen). The t
 a widget, but not interactive in the traditional sense in that you can point and click it.
 Using an extra struct for the widget IDs keeps them all in one place and allows consistent
 access like `model.widget_ids.text`. The message we want to display on the screen is stored
-in the `message` field of the model (which holds a `String`). Text on a computer screen is
+in the `message` field of the model which holds a `String`. Text on a computer screen is
 rendered using a [font](https://en.wikipedia.org/wiki/Computer_font). Usually there are many
 fonts to choose from on a computer. Nannou uses an internal registry called a "font map"
-to keep track of them. A font in the font map has a (numerical) ID to uniquely identify it.
+to keep track of them. A font in the font map has a numerical ID to uniquely identify it.
 This font ID is stored in the field `font_id`. Note that different versions of a typeface
 (e.g. regular and bold) require different font IDs. Let's fill the model with data using
 the `model()` function.
@@ -417,7 +417,7 @@ fields in the model, so they can be placed there directly.
 
 The model is set up now, let's look at the remaining logic of the app.
 
-First we handle all (window) events.
+First we handle all window events.
 ```rust,no_run
 # #![allow(unused_imports)]
 # #![allow(dead_code)]
