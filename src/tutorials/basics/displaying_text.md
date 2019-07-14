@@ -76,7 +76,7 @@ fn model(app: &App) -> Model {
         println!("{}", e);
         panic!("loading font failed");
     }
-    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
     if let Err(e) = res {
         println!("{}", e);
         panic!("loading font failed");
@@ -150,7 +150,7 @@ fn main() {
 #        println!("{}", e);
 #        panic!("loading font failed");
 #    }
-#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
 #    if let Err(e) = res {
 #        println!("{}", e);
 #        panic!("loading font failed");
@@ -228,7 +228,7 @@ struct Ids {
 #        println!("{}", e);
 #        panic!("loading font failed");
 #    }
-#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
 #    if let Err(e) = res {
 #        println!("{}", e);
 #        panic!("loading font failed");
@@ -316,7 +316,7 @@ fn model(app: &App) -> Model {
         println!("{}", e);
         panic!("loading font failed");
     }
-    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
     if let Err(e) = res {
         println!("{}", e);
         panic!("loading font failed");
@@ -390,7 +390,7 @@ draw things on it. The UI is build using `app.new_ui().build().unwrap();`. In
 #        println!("{}", e);
 #        panic!("loading font failed");
 #    }
-#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
 #    if let Err(e) = res {
 #        println!("{}", e);
 #        panic!("loading font failed");
@@ -427,8 +427,9 @@ in that fonts are files. They come in different formats (like [TrueType](https:/
 or [OpenType](https://en.wikipedia.org/wiki/OpenType)). These fonts are assets for the app.
 Assets are stored in the `assets/` directory. The default for is [Noto (sans regular)](https://www.google.com/get/noto/)
 and it needs to be placed in the `DEFAULT_FONT_PATH`, i.e. "fonts/NotoSans/NotoSans-Regular.ttf".
-We also want different fonts / typefaces. For this tutorial the fonts [retroscape](https://fontlibrary.org/en/font/retroscape)
-and [voynich](https://fontlibrary.org/en/font/voynich-font) are also used. They need to be
+We also want different fonts / typefaces. For this tutorial the fonts [retroscape](https://fontstruct.com/fontstructions/show/1233174/retroscape\
+ -1)
+and [qwigley](https://www.fontsquirrel.com/fonts/qwigley) are also used. They need to be
 downloaded and placed in the "assets/fonts/" directory. The font "retroscape" is loaded
 into the font map using the function `insert_from_file()`. This may go wrong, so some
 error checking should be done. Since the names of the variables match the names of the
@@ -483,7 +484,7 @@ First we handle all (window) events.
 #        println!("{}", e);
 #        panic!("loading font failed");
 #    }
-#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
 #    if let Err(e) = res {
 #        println!("{}", e);
 #        panic!("loading font failed");
@@ -623,7 +624,7 @@ of 60 frames per second.
 #        println!("{}", e);
 #        panic!("loading font failed");
 #    }
-#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
 #    if let Err(e) = res {
 #        println!("{}", e);
 #        panic!("loading font failed");
@@ -721,7 +722,7 @@ Finally state of the model is displayed via
 #        println!("{}", e);
 #        panic!("loading font failed");
 #    }
-#    res = font_map.insert_from_file("assets/fonts/voynich/voynich-1.23-webfont.ttf");
+#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
 #    if let Err(e) = res {
 #        println!("{}", e);
 #        panic!("loading font failed");
