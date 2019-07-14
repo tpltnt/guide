@@ -257,7 +257,7 @@ struct Ids {
 It contains the field `ui` to hold the [user interface](https://en.wikipedia.org/wiki/User_interface)
 (actually the [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface)). The UI contains
 [widgets](https://en.wikipedia.org/wiki/Widget_(GUI)) to make it interactive. We use the `Ids`
-struct as value for for die field `widget_ids`. This struct only contains one field: `text`.
+struct as value for for the field `widget_ids`. This struct only contains one field: `text`.
 That field contains the widget ID for a text field (to display on screen). The text field is
 a widget, but not interactive in the traditional sense in that you can point and click it.
 Using an extra struct for the widget IDs keeps them all in one place and allows consistent
