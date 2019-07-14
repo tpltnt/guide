@@ -15,8 +15,8 @@ display information to the viewer.
 First we import all the `nannou` crate to leverage its functionality. Then pull in
 all the functions we need.
 ```rust,no_run
-#![allow(unused_imports)]
-extern crate nannou;  // tell rust that we want to use nannou
+# #![allow(unused_imports)]
+# extern crate nannou;  // tell rust that we want to use nannou
 
 use nannou::prelude::*;  // get a lot of convenience functions
 use nannou::ui::prelude::*;  // get a lot of functions for UI
