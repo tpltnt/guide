@@ -398,7 +398,7 @@ draw things on it. The UI is build using `app.new_ui().build().unwrap();`. In
 we make an `Ids` struct and generate a widget ID for the text field. `ui.generate_widget_id()`
 is necessary to gurantee unique IDs per widget so each can interact without internal confusion.
 
-Now that the UI widgets are taken care of the can handle the fonts to display the message text.
+Now that the UI widgets are taken care of they can handle the fonts to display the message text.
 We learned already that Nannou tracks fonts in a (global) font map. We get access to it by
 calling `ui.fonts_mut()`. We retrieve all `ids()` from it (in form of an [iterator](https://en.wikipedia.org/wiki/Iterator))
 and get the `next()` ID. Since we are at the beginning this is going to be the ID of the default
