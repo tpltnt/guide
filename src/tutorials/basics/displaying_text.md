@@ -71,16 +71,12 @@ fn model(app: &App) -> Model {
     // load other fonts
     let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
     let font_id = font_map.ids().next().unwrap(); // use default font ID as default
-    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
-    if let Err(e) = res {
-        println!("{}", e);
-        panic!("loading font failed");
-    }
-    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
-    if let Err(e) = res {
-        println!("{}", e);
-        panic!("loading font failed");
-    }
+    font_map
+        .insert_from_file("assets/fonts/retroscape/Retroscape.ttf")
+        .expect("loading font 'retroscape' failed");
+    font_map
+        .insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf")
+        .expect("loading font 'qwigley' failed");
 
     // generate the actual model (of the UI)
     Model {
@@ -145,16 +141,12 @@ fn main() {
 #    // load other fonts
 #    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
 #    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
-#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
-#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
+#    font_map
+#        .insert_from_file("assets/fonts/retroscape/Retroscape.ttf")
+#        .expect("loading font 'retroscape' failed");
+#    font_map
+#        .insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf")
+#        .expect("loading font 'qwigley' failed");
 #
 #    // generate the actual model (of the UI)
 #    Model {
@@ -223,16 +215,12 @@ struct Ids {
 #    // load other fonts
 #    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
 #    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
-#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
-#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
+#    font_map
+#        .insert_from_file("assets/fonts/retroscape/Retroscape.ttf")
+#        .expect("loading font 'retroscape' failed");
+#    font_map
+#        .insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf")
+#        .expect("loading font 'qwigley' failed");
 #
 #    // generate the actual model (of the UI)
 #    Model {
@@ -311,16 +299,12 @@ fn model(app: &App) -> Model {
     // load other fonts
     let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
     let font_id = font_map.ids().next().unwrap(); // use default font ID as default
-    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
-    if let Err(e) = res {
-        println!("{}", e);
-        panic!("loading font failed");
-    }
-    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
-    if let Err(e) = res {
-        println!("{}", e);
-        panic!("loading font failed");
-    }
+    font_map
+        .insert_from_file("assets/fonts/retroscape/Retroscape.ttf")
+        .expect("loading font 'retroscape' failed");
+    font_map
+        .insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf")
+        .expect("loading font 'qwigley' failed");
 
     // generate the actual model (of the UI)
     Model {
@@ -385,16 +369,12 @@ draw things on it. The UI is build using `app.new_ui().build().unwrap();`. In
 #    // load other fonts
 #    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
 #    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
-#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
-#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
+#    font_map
+#        .insert_from_file("assets/fonts/retroscape/Retroscape.ttf")
+#        .expect("loading font 'retroscape' failed");
+#    font_map
+#        .insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf")
+#        .expect("loading font 'qwigley' failed");
 #
 #   // generate the actual model (of the UI)
 #    Model {
@@ -479,16 +459,12 @@ First we handle all (window) events.
 #    // load other fonts
 #    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
 #    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
-#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
-#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
+#    font_map
+#        .insert_from_file("assets/fonts/retroscape/Retroscape.ttf")
+#        .expect("loading font 'retroscape' failed");
+#    font_map
+#        .insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf")
+#        .expect("loading font 'qwigley' failed");
 #
 #   // generate the actual model (of the UI)
 #    Model {
@@ -625,16 +601,12 @@ of 60 frames per second.
 #    // load other fonts
 #    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
 #    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
-#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
-#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
+#    font_map
+#        .insert_from_file("assets/fonts/retroscape/Retroscape.ttf")
+#        .expect("loading font 'retroscape' failed");
+#    font_map
+#        .insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf")
+#        .expect("loading font 'qwigley' failed");
 #
 #    // generate the actual model (of the UI)
 #    Model {
@@ -724,15 +696,12 @@ Finally state of the model is displayed via
 #    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
 #    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
 #    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
-#    res = font_map.insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf");
-#    if let Err(e) = res {
-#        println!("{}", e);
-#        panic!("loading font failed");
-#    }
+#    font_map
+#        .insert_from_file("assets/fonts/retroscape/Retroscape.ttf")
+#        .expect("loading font 'retroscape' failed");
+#    font_map
+#        .insert_from_file("assets/fonts/qwigley/Qwigley-Regular.ttf")
+#        .expect("loading font 'qwigley' failed");
 #
 #    // generate the actual model (of the UI)
 #    Model {
