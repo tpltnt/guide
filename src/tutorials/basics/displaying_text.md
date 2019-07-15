@@ -735,7 +735,7 @@ Here is what the three screens should look like:
 
 ![initial screen with font "Noto Sans Regular"](./images/text_on_screen_1.png "screen 1: Noto Sans Regular")
 ![screen with font "retroscape"](./images/text_on_screen_2.png "screen 2: retroscape")
-![screen with font "voynich"](./images/text_on_screen_3.png "screen 3: voynich")
+![screen with font "qwigley"](./images/text_on_screen_3.png "screen 3: qwigley")
 
 These were a lot of things to learn and do to put some text on the
 screen. Now go ahead and change the `message` or how the app
