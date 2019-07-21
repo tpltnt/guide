@@ -410,8 +410,7 @@ in that fonts are files. They come in different formats (like [TrueType](https:/
 or [OpenType](https://en.wikipedia.org/wiki/OpenType)). These fonts are assets for the app.
 Assets are stored in the `assets/` directory. The nannou project uses [Noto (sans regular)](https://www.google.com/get/noto/)
 as its default font and it needs to be placed in the `DEFAULT_FONT_PATH`, i.e. "fonts/NotoSans/NotoSans-Regular.ttf".
-We also want different fonts / typefaces. For this tutorial the fonts [retroscape](https://fontstruct.com/fontstructions/show/1233174/retroscape\
- -1)
+We also want different fonts / typefaces. For this tutorial the fonts [retroscape](https://fontstruct.com/fontstructions/show/1233174/retroscape-1)
 and [qwigley](https://www.fontsquirrel.com/fonts/qwigley) are also used. They need to be
 downloaded and placed in the "assets/fonts/" directory. The font "retroscape" is loaded
 into the font map using the function `insert_from_file()`. This may go wrong, so some
