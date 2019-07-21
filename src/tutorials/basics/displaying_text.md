@@ -181,6 +181,7 @@ The model for this app looks like this:
 ```rust,no_run
 # #![allow(unused_imports)]
 # #![allow(dead_code)]
+# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
@@ -264,6 +265,7 @@ the `model()` function.
 ```rust,no_run
 # #![allow(unused_imports)]
 # #![allow(dead_code)]
+# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
@@ -334,6 +336,7 @@ draw things on it. The UI is build using `app.new_ui().build().unwrap();`. In
 ```rust,no_run
 # #![allow(unused_imports)]
 # #![allow(dead_code)]
+# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
@@ -423,6 +426,7 @@ First we handle all window events.
 ```rust,no_run
 # #![allow(unused_imports)]
 # #![allow(dead_code)]
+# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
@@ -565,6 +569,7 @@ of 60 frames per second.
 ```rust,no_run
 # #![allow(unused_imports)]
 # #![allow(dead_code)]
+# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
@@ -659,6 +664,7 @@ Finally state of the model is displayed via
 ```rust,no_run
 # #![allow(unused_imports)]
 # #![allow(dead_code)]
+# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
