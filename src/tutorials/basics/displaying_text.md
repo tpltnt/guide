@@ -15,7 +15,7 @@ display information to the viewer.
 First we import all the `nannou` crate to leverage its functionality. Then we will
 pull in all the functions we need.
 ```rust,no_run
-# #![allow(unused_imports)]
+# #![allow(unused)]
 # extern crate nannou;  // tell rust that we want to use nannou
 
 use nannou::prelude::*;  // get a lot of convenience functions
@@ -34,7 +34,7 @@ tutorial we need textboxes to display custom messages and a font associated
 with it. Here is the minimal skeleton of our app which already features such
 a model.
 ```rust,no_run
-#![allow(unused_imports)]
+#![allow(unused)]
 #![allow(dead_code)]
 extern crate nannou;  // tell rust that we want to use nannou
 
@@ -104,7 +104,7 @@ fn view(app: &App, model: &Model, frame: Frame) -> Frame {
 
 This has a lot going on here. The main function
 ```rust,no_run
-# #![allow(unused_imports)]
+# #![allow(unused)]
 # #![allow(dead_code)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
@@ -179,9 +179,8 @@ want to, but we keep it for now.)
 
 The model for this app looks like this:
 ```rust,no_run
-# #![allow(unused_imports)]
+# #![allow(unused)]
 # #![allow(dead_code)]
-# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
@@ -263,9 +262,8 @@ This font ID is stored in the field `font_id`. Note that different versions of a
 the `model()` function.
 
 ```rust,no_run
-# #![allow(unused_imports)]
+# #![allow(unused)]
 # #![allow(dead_code)]
-# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
@@ -334,9 +332,8 @@ Using `app.new_window().event(event).view(view).build().unwrap();` we build a wi
 assign it a function (`event`) handle window events (like keystrokes), and point to `view()` to
 draw things on it. The UI is build using `app.new_ui().build().unwrap();`. In
 ```rust,no_run
-# #![allow(unused_imports)]
+# #![allow(unused)]
 # #![allow(dead_code)]
-# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
@@ -424,9 +421,8 @@ The model is set up now, let's look at the remaining logic of the app.
 
 First we handle all window events.
 ```rust,no_run
-# #![allow(unused_imports)]
+# #![allow(unused)]
 # #![allow(dead_code)]
-# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
@@ -567,9 +563,8 @@ Now that the font ID is chosen we create a new text widget (and thus refresh its
 content) on every update event. By default these update events occur at a rate
 of 60 frames per second.
 ```rust,no_run
-# #![allow(unused_imports)]
+# #![allow(unused)]
 # #![allow(dead_code)]
-# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
@@ -662,9 +657,8 @@ the UI is called upon.
 
 Finally state of the model is displayed via
 ```rust,no_run
-# #![allow(unused_imports)]
+# #![allow(unused)]
 # #![allow(dead_code)]
-# #![allow(unused_variables)]
 # extern crate nannou;  // tell rust that we want to use nannou
 #
 # use nannou::prelude::*;  // get a lot of convenience functions
