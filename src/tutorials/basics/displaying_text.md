@@ -12,8 +12,8 @@ In this tutorial you will learn how to put text on the window of a Nannou app. T
 will help you to get a (very) basic understanding of how the GUI works and how to
 display information to the viewer.
 
-First we import all the `nannou` crate to leverage its functionality. Then pull in
-all the functions we need.
+First we import all the `nannou` crate to leverage its functionality. Then we will
+pull in all the functions we need.
 ```rust,no_run
 # #![allow(unused_imports)]
 # extern crate nannou;  // tell rust that we want to use nannou
@@ -24,12 +24,15 @@ use nannou::ui::Color::Rgba;  // we want to use color later
 
 fn main() {}
 ```
-We pull in `nannou::ui::Color::Rgba` explicitly because we want to use color later.
+We import `nannou::ui::Color::Rgba` explicitly because we want to use color later.
 The `prelude` contains functions which are used quite often, so we do not need to
-pull them all in explicitly one by one. This code code compiles, but is hardly a
+get them all in explicitly one by one. This code code compiles, but is hardly a
 Nannou app.
 
-Here is the minimal skeleton of our app.
+Each nannou app needs a model to represent the world it works with. In this
+tutorial we need textboxes to display custom messages and a font associated
+with it. Here is the minimal skeleton of our app which already features such
+a model.
 ```rust,no_run
 #![allow(unused_imports)]
 #![allow(dead_code)]
@@ -169,8 +172,8 @@ fn main() {
 # }
 ```
 builds an app based on the model (state description) emitted by the `model()` function.
-This model will be updated (by timing events) with the `update()` function. The
-`main` function will finally `run()` this app until `ESC` is pressed. Exiting an app
+This model will be updated (by timing and keyboard events) with the `update()` function.
+The `main` function will finally `run()` this app until `ESC` is pressed. Exiting an app
 when pressing `ESC` is the default behaviour for Nannou app. (This can be changed if you
 want to, but we keep it for now.)
 
@@ -402,7 +405,7 @@ Now that the UI widgets are taken care of they can handle the fonts to display t
 We learned already that Nannou tracks fonts in a (global) font map. We get access to it by
 calling `ui.fonts_mut()`. We retrieve all `ids()` from it (in form of an [iterator](https://en.wikipedia.org/wiki/Iterator))
 and get the `next()` ID. Since we are at the beginning this is going to be the ID of the default
-font. But wait? We know that the font is a file ... where is that loaded from? You are right
+font. But wait. We know that the font is a file ... where is that loaded from? You are right
 in that fonts are files. They come in different formats (like [TrueType](https://en.wikipedia.org/wiki/TrueType),
 or [OpenType](https://en.wikipedia.org/wiki/OpenType)). These fonts are assets for the app.
 Assets are stored in the `assets/` directory. The nannou project uses [Noto (sans regular)](https://www.google.com/get/noto/)
