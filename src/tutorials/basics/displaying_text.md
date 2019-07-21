@@ -703,7 +703,6 @@ Finally state of the model is displayed via
 #    // load other fonts
 #    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
 #    let font_id = font_map.ids().next().unwrap(); // use default font ID as default
-#    let mut res = font_map.insert_from_file("assets/fonts/retroscape/Retroscape.ttf");
 #    font_map
 #        .insert_from_file("assets/fonts/retroscape/Retroscape.ttf")
 #        .expect("loading font 'retroscape' failed");
