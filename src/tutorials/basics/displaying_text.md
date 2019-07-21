@@ -454,9 +454,9 @@ First we handle all window events.
 #    ); // text to display
 #
 #    // generate IDs for each widget
-    let widget_ids = Ids {
-        text: ui.generate_widget_id(),
-    };
+#    let widget_ids = Ids {
+#        text: ui.generate_widget_id(),
+#    };
 #
 #    // load other fonts
 #    let font_map = ui.fonts_mut();  // get the mutable map of fonts for the UI
