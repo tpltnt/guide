@@ -97,9 +97,7 @@ fn event(_app: &App, model: &mut Model, event: WindowEvent) {}
 fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
 
 // display the state of the world
-fn view(app: &App, model: &Model, frame: Frame) -> Frame {
-    frame
-}
+fn view(app: &App, model: &Model, frame: &Frame) {}
 ```
 
 This has a lot going on here. The main function
@@ -167,9 +165,7 @@ fn main() {
 # fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
 #
 # // display the state of the world
-# fn view(app: &App, model: &Model, frame: Frame) -> Frame {
-#    frame
-# }
+# fn view(app: &App, model: &Model, frame: &Frame) {}
 ```
 builds an app based on the model (state description) emitted by the `model()` function.
 This model will be updated (by timing and keyboard events) with the `update()` function.
@@ -241,9 +237,7 @@ struct Ids {
 # fn update(_app: &App, _model: &mut Model, _update: nannou::event::Update) {}
 #
 # // display the state of the world
-# fn view(app: &App, _model: &Model, frame: Frame) -> Frame {
-#    frame
-# }
+# fn view(app: &App, _model: &Model, frame: &Frame) {}
 ```
 It contains the field `ui` to hold the [user interface](https://en.wikipedia.org/wiki/User_interface)
 (actually the [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface)). The UI contains
@@ -324,9 +318,7 @@ fn model(app: &App) -> Model {
 # fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
 #
 # // display the state of the world
-# fn view(app: &App, model: &Model, frame: Frame) -> Frame {
-#    frame
-# }
+# fn view(app: &App, model: &Model, frame: &Frame) {}
 ```
 Using `app.new_window().event(event).view(view).build().unwrap();` we build a window for the app,
 assign it a function (`event`) handle window events (like keystrokes), and point to `view()` to
@@ -394,9 +386,7 @@ draw things on it. The UI is build using `app.new_ui().build().unwrap();`. In
 # fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
 #
 # // display the state of the world
-# fn view(app: &App, model: &Model, frame: Frame) -> Frame {
-#    frame
-# }
+# fn view(app: &App, model: &Model, frame: &Frame) {}
 ```
 we make an `Ids` struct and generate a widget ID for the text field. `ui.generate_widget_id()`
 is necessary to gurantee unique IDs per widget so each can interact without internal confusion.
@@ -533,9 +523,7 @@ fn event(_app: &App, model: &mut Model, event: WindowEvent) {
 # fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
 #
 # // display the state of the world
-# fn view(app: &App, model: &Model, frame: Frame) -> Frame {
-#    frame
-# }
+# fn view(app: &App, model: &Model, frame: &Frame) {}
 ```
 The `event()` function does handle window events. We use [pattern-matching](https://en.wikipedia.org/wiki/Pattern_matching)
 to distinguish between the different events. Here we only care about keys being pressed
@@ -638,12 +626,11 @@ fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {
     textbox.set(model.widget_ids.text, ui); // set (widget) ID for text box
 }
 #
-# fn view(app: &App, model: &Model, frame: Frame) -> Frame {
+# fn view(app: &App, model: &Model, frame: &Frame) {
 #    let draw = app.draw(); // get drawing context /frame
 #    draw.background().rgb(0.0, 0.0, 0.0); // set background to black -> clear screen
 #    draw.to_frame(app, &frame).unwrap(); // write the result of drawing to window's OpenGL frame
 #    model.ui.draw_to_frame(app, &frame).unwrap(); // draw UI on frame
-#    frame // return new frame
 # }
 
 ```
@@ -719,12 +706,11 @@ Finally state of the model is displayed via
 # // handle update event to update the (world) model accordingly
 # fn update(_app: &App, model: &mut Model, _update: nannou::event::Update) {}
 #
-fn view(app: &App, model: &Model, frame: Frame) -> Frame {
+fn view(app: &App, model: &Model, frame: &Frame) {
     let draw = app.draw(); // get drawing context /frame
     draw.background().rgb(0.0, 0.0, 0.0); // set background to black -> clear screen
     draw.to_frame(app, &frame).unwrap(); // write the result of drawing to window's OpenGL frame
     model.ui.draw_to_frame(app, &frame).unwrap(); // draw UI on frame
-    frame // return new frame
 }
 ```
 We draw a black background on a frame. This frame is displayed so that
