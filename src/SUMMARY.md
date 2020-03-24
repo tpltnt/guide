@@ -16,6 +16,7 @@
     - [Basics - Drawing 2D Shapes](./tutorials/basics/drawing-2d-shapes.md)
 - [Developer Reference](./developer_reference.md)
 - [API Reference](./api_reference.md)
+- [Updating Old Code](./updating_nannou_code.md)
 - [Showcases](./showcases.md)
 
 [Contributors](./contributors.md)
