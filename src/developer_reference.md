@@ -51,3 +51,16 @@ fn view(_app: &App, _frame: Frame) {
     // the sketch code
 }
 ```
+
+## Window sizing does not work / with_dimension is gone
+
+If you have code like
+```
+new_window().with_dimension(600,600)
+```
+won't work after 0.13.1
+
+Use `size()` in this manner:
+```
+new_window().size(600, 600)
+```
