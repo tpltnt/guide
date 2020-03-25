@@ -15,6 +15,7 @@
     - [Basics - Anatomy of a Nannou App](./tutorials/basics/anatomy-of-a-nannou-app.md)
     - [Basics - Drawing 2D Shapes](./tutorials/basics/drawing-2d-shapes.md)
 - [Developer Reference](./developer_reference.md)
+- [Porting From Other Frameworks](./porting_from_other_frameworks.md)
 - [API Reference](./api_reference.md)
 - [Showcases](./showcases.md)
 
