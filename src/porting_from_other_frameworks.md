@@ -4,6 +4,8 @@ Nannou is inspired by other creative coding frameworks inspired like [Processing
 [openFrameworks](https://openframeworks.cc), and [Cinder](https://libcinder.org/).
 This section is intended to help everyone making the switch to nannou and bringing their code with them.
 
+**note: This is very much a work in progress. It will be extended as we learn about porting issues.**
+
 ## General
 **This section shall contain general information**
 
