@@ -13,9 +13,9 @@ This section is intended to help everyone making the switch to nannou and bringi
 Processing has two famous functions. The `setup()` function prepares everything and takes care of
 the initial setup. The `draw()` actuallly changes things on the screen.
 
-Sometimes the `setup()` function is used to prepare the screen (e.g. to set the background). This
-behaviour can be emulated using `.nth()`, which counts the number of frames displayed in the
-associated window.
+Sometimes the `setup()` function is used to prepare the screen. Sometimes code already draws
+in this phase (e.g. to set the background). This behaviour can be emulated using `.nth()`, which
+counts the number of frames displayed in the associated window.
 ```rust
 fn view(app: &App, m: &Model, frame: &Frame) {
     let draw = app.draw();
