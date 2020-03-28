@@ -13,6 +13,10 @@ This section is intended to help everyone making the switch to nannou and bringi
 Processing has two famous functions. The `setup()` function prepares everything and takes care of
 the initial setup. The `draw()` actuallly changes things on the screen.
 
+Most tasks of the `setup()` function in processing are taken care of by the `model()` function in nannou.
+This is where the inital state of the world (model) is created. This model information is then processed
+later by other functions.
+
 Sometimes the `setup()` function is used to prepare the screen. Sometimes code already draws
 in this phase (e.g. to set the background). This behaviour can be emulated using `.nth()`, which
 counts the number of frames displayed in the associated window.
