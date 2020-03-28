@@ -31,6 +31,12 @@ fn view(app: &App, m: &Model, frame: &Frame) {
 }
 ```
 
+The `draw()` function in processing is used to both draw on the screen and also to change the state
+of to be displayed. Nannou takes a more explicit approach here. The function `view()` in nannou
+displays things. Functions like `update()` or `event()` are used to (only) change the state of the
+model to be displayed. Thus there are dedicated places which take care of either showing things
+or changing things.
+
 
 ## openFrameworks
 **This section shall contain openFrameworks-specific information**
