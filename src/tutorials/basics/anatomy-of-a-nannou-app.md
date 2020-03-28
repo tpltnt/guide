@@ -206,7 +206,7 @@ will just return an instance of our empty **Model**.
 > You can learn more about what the **App** is responsible for and capable of
 > [here](https://docs.rs/nannou/latest/nannou/app/struct.App.html).
 
-## **event** - updating the Model on app events
+## **update** and **event** - updating the Model (on app events)
 
 ```rust,no_run
 # #![allow(dead_code)] 
@@ -270,7 +270,8 @@ fn update(_app: &App, _model: &mut Model, _update: Update) {
 ```
 
 Now, our new **update** function will only run each time a timed update
-occurs.
+occurs. The update function will only update the state of your model.
+It can not be used for drawing.
 
 > Note: Nannou provides a whole suite of different events that may be registered
 > while building an app or window in this way. See the [all_functions.rs
